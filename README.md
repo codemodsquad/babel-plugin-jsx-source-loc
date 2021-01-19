@@ -1,30 +1,54 @@
-# untranspiled-js-library-skeleton
+# babel-plugin-jsx-source-loc
 
-[![CircleCI](https://circleci.com/gh/jedwards1211/untranspiled-js-library-skeleton.svg?style=svg)](https://circleci.com/gh/jedwards1211/untranspiled-js-library-skeleton)
-[![Coverage Status](https://codecov.io/gh/jedwards1211/untranspiled-js-library-skeleton/branch/master/graph/badge.svg)](https://codecov.io/gh/jedwards1211/untranspiled-js-library-skeleton)
+[![CircleCI](https://circleci.com/gh/codemodsquad/babel-plugin-jsx-source-loc.svg?style=svg)](https://circleci.com/gh/codemodsquad/babel-plugin-jsx-source-loc)
+[![Coverage Status](https://codecov.io/gh/codemodsquad/babel-plugin-jsx-source-loc/branch/master/graph/badge.svg)](https://codecov.io/gh/codemodsquad/babel-plugin-jsx-source-loc)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![npm version](https://badge.fury.io/js/untranspiled-js-library-skeleton.svg)](https://badge.fury.io/js/untranspiled-js-library-skeleton)
+[![npm version](https://badge.fury.io/js/babel-plugin-jsx-source-loc.svg)](https://badge.fury.io/js/babel-plugin-jsx-source-loc)
 
-This is my personal skeleton for creating an untranspiled JS library npm package. You are welcome to use it.
+Adds a `data-source-loc` prop to every JSX element, so that you can quickly look up where an element was rendered
+in the React Dev Tools. This is primarily intended for dev mode, not production.
 
-## Quick start
+# Example
 
-```sh
-npx 0-60 clone https://github.com/jedwards1211/untranspiled-js-library-skeleton.git
+### Input
+
+```jsx
+function MyComponent() {
+  return (
+    <div className="foo">
+      <Alert variant="danger">
+        {names.map(name => (
+          <Card key={name}>{name}</Card>
+        ))}
+      </Alert>
+    </div>
+  )
+}
 ```
 
-## Tools used
+### output
 
-- mocha
-- chai
-- istanbul
-- nyc
-- eslint
-- eslint-watch
-- flow
-- flow-watch
-- husky
-- semantic-release
-- Travis CI
-- Coveralls
+```jsx
+function MyComponent() {
+  return (
+    <div className="foo" data-source-loc="src/MyComponent.js:3:4">
+      <Alert variant="danger" data-source-loc="src/MyComponent.js:4:6">
+        {names.map(name => (
+          <Card key={name} data-source-loc="src/MyComponent.js:6:10">
+            {name}
+          </Card>
+        ))}
+      </Alert>
+    </div>
+  )
+}
+```
+
+# Usage
+
+```
+npm i --save-dev babel-plugin-jsx-source-loc
+```
+
+And add `"babel-plugin-jsx-source-loc"` to your babel configuration.

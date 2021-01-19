@@ -1,7 +1,7 @@
 {
-  "name": "untranspiled-js-library-skeleton",
+  "name": "babel-plugin-jsx-source-loc",
   "version": "0.0.0-development",
-  "description": "my skeleton for transpiler-free JS packages",
+  "description": "add a prop like data-source-loc=\"src/foo.js:35:8\" to every JSX element",
   "main": "index.js",
   "author": "Andy Edwards",
   "license": "MIT",
@@ -56,16 +56,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jedwards1211/untranspiled-js-library-skeleton.git"
+    "url": "https://github.com/codemodsquad/babel-plugin-jsx-source-loc.git"
   },
   "keywords": [
-    "skeleton"
+    "babel",
+    "jsx",
+    "react",
+    "transforms"
   ],
   "bugs": {
-    "url": "https://github.com/jedwards1211/untranspiled-js-library-skeleton/issues"
+    "url": "https://github.com/codemodsquad/babel-plugin-jsx-source-loc/issues"
   },
-  "homepage": "https://github.com/jedwards1211/untranspiled-js-library-skeleton#readme",
+  "homepage": "https://github.com/codemodsquad/babel-plugin-jsx-source-loc#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@jedwards1211/commitlint-config": "^1.0.1",
@@ -84,5 +90,7 @@
     "prettier-eslint": "^8.8.2",
     "semantic-release": "^17.1.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/types": "^7.12.12"
+  }
 }
