@@ -25,9 +25,10 @@ function isReactFragment(path) {
     node.property.name === 'Fragment' &&
     node.object.type === 'JSXIdentifier'
   ) {
+    if (node.object.name === 'React') return true
     const binding = path.scope.getBinding(node.object.name)
     const boundPath = binding ? binding.path : null
-    if (!boundPath) return node.object.name === 'React'
+    if (!boundPath) return false
     return isReactImportOrRequire(boundPath)
   } else if (node.type === 'JSXIdentifier' && node.name === 'Fragment') {
     const binding = path.scope.getBinding(node.name)
